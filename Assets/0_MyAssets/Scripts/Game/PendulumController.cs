@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PendulumController : MonoBehaviour
+public class PendulumController : BaseShootController
 {
     //　進んでいる方向
     private int direction = 1;

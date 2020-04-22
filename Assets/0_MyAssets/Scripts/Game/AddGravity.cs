@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AddGravity : MonoBehaviour
 {
+    [SerializeField] float downForce;
     Rigidbody rb;
     void Start()
     {
@@ -13,7 +14,7 @@ public class AddGravity : MonoBehaviour
 
     void Update()
     {
-        rb.AddForce(Vector3.down * 100, ForceMode.Acceleration);
+        rb.AddForce(Vector3.down * downForce, ForceMode.Acceleration);
 
     }
 }
