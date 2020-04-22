@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     Rigidbody rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = false;
         transform.parent = null;
         rb.velocity = transform.forward * 70;
+        animator.SetTrigger("Jump");
     }
 
     public void Grab(Transform target)
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
         transform.parent = target;
         transform.rotation = target.rotation;
         CameraController.i.Move(40);
+        animator.SetTrigger("Idle");
     }
 
     void CheckGoal(Collision col)
