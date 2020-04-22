@@ -21,13 +21,13 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void Move()
+    public void Move(float distance)
     {
         if (isStart == false)
         {
             isStart = true;
             return;
         }
-        transform.DOLocalMoveZ(40, 1).SetRelative();
+        transform.DOLocalMoveZ(distance, 1).SetRelative();
     }
 }

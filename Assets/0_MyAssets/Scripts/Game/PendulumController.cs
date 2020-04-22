@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PendulumController : BaseShootController
 {
+
     //　進んでいる方向
-    private int direction = 1;
+    [SerializeField] private int direction = 1;
     //　Z軸の角度
     private float angle = 0f;
     //　動き始める時の時間

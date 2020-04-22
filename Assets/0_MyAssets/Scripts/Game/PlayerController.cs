@@ -19,19 +19,14 @@ public class PlayerController : MonoBehaviour
             rb.isKinematic = false;
             //rb.useGravity = true;
             transform.parent = null;
-            rb.velocity = transform.forward * 50;
+            rb.velocity = transform.forward * 70;
         }
 
     }
 
     void OnCollisionEnter(Collision col)
     {
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
+        CheckGoal(col);
     }
 
     public void Grab(Transform target)
@@ -39,7 +34,17 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = true;
         transform.parent = target;
         transform.rotation = target.rotation;
-        CameraController.i.Move();
+        CameraController.i.Move(40);
+    }
+
+    void CheckGoal(Collision col)
+    {
+        if (!col.transform.CompareTag("Goal")) { return; }
+
+        transform.eulerAngles = Vector3.zero;
+        rb.velocity = Vector3.zero;
+        CameraController.i.Move(50);
+
     }
 
 }
