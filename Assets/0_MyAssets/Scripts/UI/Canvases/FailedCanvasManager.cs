@@ -25,7 +25,7 @@ public class FailedCanvasManager : BaseCanvasManager
 
     protected override void OnOpen()
     {
-        DOVirtual.DelayedCall(1.2f, () =>
+        DOVirtual.DelayedCall(0f, () =>
     {
         gameObject.SetActive(true);
     });
@@ -38,7 +38,7 @@ public class FailedCanvasManager : BaseCanvasManager
 
     void OnClickRestartButton()
     {
-        Variables.screenState = ScreenState.Initialize;
+        base.ReLoadScene();
     }
 
     void OnClickHomeButton()

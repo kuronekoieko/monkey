@@ -59,24 +59,16 @@ public class BaseCanvasManager : MonoBehaviour
 
     protected void ToNextScene()
     {
-        int stageNum = UnityEngine.Random.Range(0, 3);
-        //stageNum = 1;
-        SceneManager.LoadScene(stageNum);
+        Variables.currentStageIndex++;
+        SceneManager.LoadScene("GameScene");
     }
 
     protected void ReLoadScene()
     {
-        string sceneName = SceneManager.GetSceneAt(0).name;
-        SceneManager.UnloadSceneAsync(sceneName);
-        SceneManager.LoadScene(sceneName);
-
+        SceneManager.LoadScene("GameScene");
     }
 
-    // イベントハンドラー（イベント発生時に動かしたい処理）
-    void SceneLoaded(Scene nextScene, LoadSceneMode mode)
-    {
-        Variables.screenState = ScreenState.Initialize;
-    }
+
 
     /*
         public readonly ScreenState thisScreen = ScreenState.

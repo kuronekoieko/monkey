@@ -41,8 +41,7 @@ public class ClearCanvasManager : BaseCanvasManager
 
     void OnClickNextButton()
     {
-        Variables.currentStageIndex++;
-        Variables.screenState = ScreenState.Initialize;
+        base.ToNextScene();
     }
 
     void OnClickHomeButton()

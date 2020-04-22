@@ -42,6 +42,8 @@ public class UIManager : MonoBehaviour
             if (canvases[i] == null) { continue; }
             canvases[i].OnStart();
         }
+
+        SceneManager.sceneLoaded += SceneLoaded;
         SceneManager.LoadScene("GameScene");
     }
 
@@ -73,5 +75,11 @@ public class UIManager : MonoBehaviour
             canvases[i].OnInitialize();
         }
         Variables.screenState = ScreenState.Game;
+    }
+
+    // イベントハンドラー（イベント発生時に動かしたい処理）
+    void SceneLoaded(Scene nextScene, LoadSceneMode mode)
+    {
+        Variables.screenState = ScreenState.Initialize;
     }
 }
