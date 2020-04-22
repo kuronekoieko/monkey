@@ -10,21 +10,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-      
     }
 
 
     void Update()
     {
-        //rb.velocity = Vector3.forward * speed;
         if (Input.GetMouseButtonDown(0))
         {
             Release();
         }
-        if (transform.position.y < -40)
-        {
-            Variables.screenState = ScreenState.Failed;
-        }
+        CheckFall();
     }
 
     void OnCollisionEnter(Collision col)
@@ -45,6 +40,9 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = true;
         transform.parent = target;
         transform.rotation = target.rotation;
+        Vector3 pos = transform.localPosition;
+        pos.z = -1.33f;
+        transform.localPosition = pos;
         CameraController.i.Move(60);
         animator.SetTrigger("Idle");
     }
@@ -57,6 +55,14 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector3.zero;
         CameraController.i.Move(50);
         Variables.screenState = ScreenState.Clear;
+    }
+
+    void CheckFall()
+    {
+        if (transform.position.y > -40) { return; }
+
+        Variables.screenState = ScreenState.Failed;
+
     }
 
 }
