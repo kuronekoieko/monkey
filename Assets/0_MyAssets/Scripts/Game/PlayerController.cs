@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+      
     }
 
 
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = true;
         transform.parent = target;
         transform.rotation = target.rotation;
-        CameraController.i.Move(40);
+        CameraController.i.Move(60);
         animator.SetTrigger("Idle");
     }
 
