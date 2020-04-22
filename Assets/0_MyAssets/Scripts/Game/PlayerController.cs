@@ -16,17 +16,24 @@ public class PlayerController : MonoBehaviour
         //rb.velocity = Vector3.forward * speed;
         if (Input.GetMouseButtonDown(0))
         {
-            rb.isKinematic = false;
-            //rb.useGravity = true;
-            transform.parent = null;
-            rb.velocity = transform.forward * 70;
+            Release();
         }
-
+        if (transform.position.y < -40)
+        {
+            Variables.screenState = ScreenState.Failed;
+        }
     }
 
     void OnCollisionEnter(Collision col)
     {
         CheckGoal(col);
+    }
+
+    void Release()
+    {
+        rb.isKinematic = false;
+        transform.parent = null;
+        rb.velocity = transform.forward * 70;
     }
 
     public void Grab(Transform target)
@@ -44,7 +51,7 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
         rb.velocity = Vector3.zero;
         CameraController.i.Move(50);
-
+        Variables.screenState = ScreenState.Clear;
     }
 
 }

@@ -52,6 +52,11 @@ public class BaseCanvasManager : MonoBehaviour
     {
     }
 
+    public void OnInitialize()
+    {
+
+    }
+
     protected void ToNextScene()
     {
         int stageNum = UnityEngine.Random.Range(0, 3);

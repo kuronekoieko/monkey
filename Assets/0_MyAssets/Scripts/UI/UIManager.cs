@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject gameDirector;
-    public static UIManager i;
+    [SerializeField] GameObject _gameDirector;
+    public static GameObject gameDirector;
     BaseCanvasManager[] canvases;
 
     //Awakeより先に呼ばれる
@@ -18,20 +18,23 @@ public class UIManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void RuntimeInitializeApplication()
     {
-        // SceneManager.LoadScene("UIScene");
+        SceneManager.LoadScene("UIScene");
     }
 
     void Awake()
     {
-        i = this;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        DontDestroyOnLoad(gameDirector);
+
+        if (gameDirector == null)
+        {
+            gameDirector = _gameDirector;
+            DontDestroyOnLoad(_gameDirector);
+        }
     }
 
     void Start()
     {
-        i = this;
         canvases = new BaseCanvasManager[transform.childCount];
         for (int i = 0; i < canvases.Length; i++)
         {
@@ -39,15 +42,36 @@ public class UIManager : MonoBehaviour
             if (canvases[i] == null) { continue; }
             canvases[i].OnStart();
         }
+        SceneManager.LoadScene("GameScene");
     }
 
     void Update()
+    {
+        if (Variables.screenState == ScreenState.Initialize)
+        {
+            Initialize();
+        }
+        else
+        {
+            OnUpdate();
+        }
+    }
+    void OnUpdate()
     {
         for (int i = 0; i < canvases.Length; i++)
         {
             if (canvases[i] == null) { continue; }
             canvases[i].OnUpdate();
         }
+    }
 
+    void Initialize()
+    {
+        for (int i = 0; i < canvases.Length; i++)
+        {
+            if (canvases[i] == null) { continue; }
+            canvases[i].OnInitialize();
+        }
+        Variables.screenState = ScreenState.Game;
     }
 }
