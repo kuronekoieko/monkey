@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = true;
         transform.parent = target;
         transform.rotation = target.rotation;
+        CameraController.i.Move();
     }
 
 }
