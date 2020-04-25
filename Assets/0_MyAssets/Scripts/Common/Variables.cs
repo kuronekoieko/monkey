@@ -14,8 +14,9 @@ public class Variables : MonoBehaviour
     public static GameState gameState;
     public static int currentStageIndex
     {
-        set { _currentstageIndex = Mathf.Clamp(value, 0, 9); }
+        set { _currentstageIndex = Mathf.Clamp(value, 0, lastStageIndex); }
         get { return _currentstageIndex; }
     }
     private static int _currentstageIndex;
+    public static int lastStageIndex;
 }
